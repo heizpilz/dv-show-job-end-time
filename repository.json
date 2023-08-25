@@ -1,7 +1,7 @@
 {
 	"Releases": [
 		{
-			"Id": "MOD_NAME",
+			"Id": "ShowJobEndTime",
 			"Version": "1.0.0",
 			"DownloadUrl": "https://github.com/OWNER/REPOSITORY/releases/download/TAG/FILE_NAME.zip"
 		}
