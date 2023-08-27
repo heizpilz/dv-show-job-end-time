@@ -10,12 +10,15 @@
 	<!-- Derail Valley -->
 	<ItemGroup>
 		<Reference Include="Assembly-CSharp"/>
+		<Reference Include="DV.Utils"/>
+		<Reference Include="DV.WeatherSystem"/>
 	</ItemGroup>
 
 	<!-- Unity -->
 	<ItemGroup>
 		<Reference Include="UnityEngine"/>
 		<Reference Include="UnityEngine.CoreModule"/>
+		<Reference Include="Unity.TextMeshPro"/>
 	</ItemGroup>
 
 	<!-- Mod Loader -->

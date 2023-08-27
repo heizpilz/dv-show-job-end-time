@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using DV.Booklets;
+using DV.RenderTextureSystem.BookletRender;
+using DV.Utils;
+using DV.WeatherSystem;
 using HarmonyLib;
+using TMPro;
+using UnityEngine;
 using UnityModManagerNet;
 
 namespace ShowJobEndTime;
 
+[EnableReloading]
 public static class Main
 {
 	// Unity Mod Manage Wiki: https://wiki.nexusmods.com/index.php/Category:Unity_Mod_Manager
@@ -27,5 +35,49 @@ public static class Main
 		}
 
 		return true;
+	}
+
+	[HarmonyPatch(typeof(BookletCreator_Job), "GetBookletTemplateData")]
+	class ChangeBonusTimeToTimeOfDay
+	{
+		static string GetTimeBonusText(Job_data job)
+		{
+			WeatherPresetManager weatherPresetManager = SingletonBehaviour<WeatherDriver>.Instance.manager;
+			float remainingRLSeconds = job.timeLimit - job.timeOnJob;
+			double timeScalingFactor = 1440d / weatherPresetManager.DayLengthInMinutes;
+			double remainingGameSeconds = remainingRLSeconds * timeScalingFactor;
+			DateTime timeBonusEnd = weatherPresetManager.DateTime.AddSeconds(remainingGameSeconds);
+			return timeBonusEnd.ToString("t") + "\n" + timeBonusEnd.ToString("m");
+		}
+
+		public static List<TemplatePaperData> Postfix(List<TemplatePaperData> result, Job_data job)
+		{
+			foreach (TemplatePaperData templatePaperData in result)
+			{
+				if (templatePaperData.GetTemplatePaperType() == TemplatePaperType.FrontPage)
+				{
+					FrontPageTemplatePaperData frontPageTemplatePaperData = (FrontPageTemplatePaperData)templatePaperData;
+					frontPageTemplatePaperData.timeBonus = GetTimeBonusText(job);
+				}
+			}
+			return result;
+		}
+	}
+
+	[HarmonyPatch(typeof(JobBookletRender), "TemplatePaperDataFill")]
+	class SmallerTimeBonusText
+	{
+		public static void Postfix(TemplatePaperData templateData, ref JobBookletRender __instance)
+		{
+			if (templateData.GetTemplatePaperType() == TemplatePaperType.FrontPage)
+			{
+				FrontPageTemplatePaper fpt = __instance.frontPageTemplate;
+				fpt.timeBonus.fontSize = 45f;
+				fpt.timeBonus.alignment = TextAlignmentOptions.Center;
+				fpt.timeBonus.lineSpacing = -40f;
+				fpt.timeBonus.margin = new Vector4(0, -42, 0, 0);
+				fpt.timeBonus.fontWeight = FontWeight.Black;
+			}
+		}
 	}
 }
