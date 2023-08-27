@@ -15,17 +15,18 @@ namespace ShowJobEndTime;
 [EnableReloading]
 public static class Main
 {
+	internal static Harmony? harmony = null;
+
 	// Unity Mod Manage Wiki: https://wiki.nexusmods.com/index.php/Category:Unity_Mod_Manager
 	private static bool Load(UnityModManager.ModEntry modEntry)
 	{
-		Harmony? harmony = null;
-
 		try
 		{
 			harmony = new Harmony(modEntry.Info.Id);
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
 
 			// Other plugin startup logic
+			modEntry.OnToggle = OnToggle;
 		}
 		catch (Exception ex)
 		{
@@ -36,6 +37,20 @@ public static class Main
 
 		return true;
 	}
+
+	private static bool OnToggle(UnityModManager.ModEntry modEntry, bool value)
+	{
+		if (value)
+		{
+			harmony?.PatchAll(Assembly.GetExecutingAssembly());
+		}
+		else
+		{
+			harmony?.UnpatchAll(modEntry.Info.Id);
+		}
+		return true;
+	}
+
 
 	[HarmonyPatch(typeof(BookletCreator_Job), "GetBookletTemplateData")]
 	class ChangeBonusTimeToTimeOfDay
