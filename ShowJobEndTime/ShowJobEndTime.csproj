@@ -12,6 +12,7 @@
 		<Reference Include="Assembly-CSharp"/>
 		<Reference Include="DV.Utils"/>
 		<Reference Include="DV.WeatherSystem"/>
+		<Reference Include="I2.Localization"/>
 	</ItemGroup>
 
 	<!-- Unity -->

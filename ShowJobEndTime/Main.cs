@@ -6,6 +6,7 @@ using DV.RenderTextureSystem.BookletRender;
 using DV.Utils;
 using DV.WeatherSystem;
 using HarmonyLib;
+using I2.Loc;
 using TMPro;
 using UnityEngine;
 using UnityModManagerNet;
@@ -51,6 +52,13 @@ public static class Main
 		return true;
 	}
 
+	public static string GetLocalizedAbbrMonthDay(DateTime dateTime)
+	{
+		string pattern = LocalizationManager.CurrentCulture.DateTimeFormat.MonthDayPattern;
+		pattern = pattern.Replace("MMMM", "MMM");
+		return dateTime.ToString(pattern, LocalizationManager.CurrentCulture);
+	}
+
 
 	[HarmonyPatch(typeof(BookletCreator_Job), "GetBookletTemplateData")]
 	class ChangeBonusTimeToTimeOfDay
@@ -62,7 +70,7 @@ public static class Main
 			double timeScalingFactor = 1440d / weatherPresetManager.DayLengthInMinutes;
 			double remainingGameSeconds = remainingRLSeconds * timeScalingFactor;
 			DateTime timeBonusEnd = weatherPresetManager.DateTime.AddSeconds(remainingGameSeconds);
-			return timeBonusEnd.ToString("t") + "\n" + timeBonusEnd.ToString("m");
+			return timeBonusEnd.ToString("t") + "\n" + GetLocalizedAbbrMonthDay(timeBonusEnd);
 		}
 
 		public static List<TemplatePaperData> Postfix(List<TemplatePaperData> result, Job_data job)
@@ -92,6 +100,19 @@ public static class Main
 				fpt.timeBonus.lineSpacing = -40f;
 				fpt.timeBonus.margin = new Vector4(0, -42, 0, 0);
 				fpt.timeBonus.fontWeight = FontWeight.Black;
+			}
+		}
+	}
+
+	[HarmonyPatch(typeof(WeatherForecastPoster), "OnForecastUpdated")]
+	class LocalizeWeatherForcastPoster
+	{
+		public static void Postfix(WeatherForecastPoster __instance)
+		{
+			DateTime? lastForecast = __instance.forecaster.lastForecastTime;
+			if (lastForecast.HasValue)
+			{
+				__instance.dateTMPro.text = GetLocalizedAbbrMonthDay(lastForecast.Value);
 			}
 		}
 	}
