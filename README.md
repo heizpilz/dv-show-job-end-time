@@ -9,14 +9,14 @@
 
 <!-- PROJECT TITLE -->
 <div align="center">
-	<h1>Unity Mod Manager Mod Template</h1>
+	<h1>Show Bonus End Time</h1>
 	<p>
-		A template for creating <a href="http://www.derailvalley.com/">Derail Valley</a> mods that load via <a href="https://www.nexusmods.com/site/mods/21">Unity Mod Manager</a>.
+		A <a href="http://www.derailvalley.com/">Derail Valley</a> mod that loads via <a href="https://www.nexusmods.com/site/mods/21">Unity Mod Manager</a>.
 		<br />
 		<br />
-		<a href="https://github.com/derail-valley-modding/template-umm/issues">Report Bug</a>
+		<a href="https://github.com/heizpilz/dv-show-job-end-time/issues">Report Bug</a>
 		·
-		<a href="https://github.com/derail-valley-modding/template-umm/issues">Request Feature</a>
+		<a href="https://github.com/heizpilz/dv-show-job-end-time/issues">Request Feature</a>
 	</p>
 </div>
 
@@ -41,8 +41,14 @@
 
 ## About The Project
 
-This is a template for Derail Valley mods that load via the Unity Mod Manager mod loader.  
-TODO: Instructions for how mod creators use this template.
+This mod shows the in game end time for the time bonus on the job booklets after accepting them, instead of showing the RL duration.
+Without this you have to keep track of the real-life time yourself, to know when the time bonus will expire. Now you can just compare the given end time to any clock in the game and get your remaining time span.
+
+In the shorter day duration settings a bonus time can easily extend to the next few days, so the mod also shows the in game date for the end time. This date is also shown on the weather forecast posters in station offices. With this mod enabled it is localized to be easier to understand in both occurrences.
+
+This mod can safely be en- or disabled at all times, but existing job booklets will only reflect the change on reloading the save.
+
+Get the mod from <a href="https://www.nexusmods.com/derailvalley/mods/783">Nexus</a>
 
 
 
@@ -62,7 +68,8 @@ Below is an example of the necessary structure. When creating your targets file,
 <Project>
 	<PropertyGroup>
 		<ReferencePath>
-			C:\Program Files (x86)\Steam\steamapps\common\Derail Valley\DerailValley_Data\Managed\
+			C:\Program Files (x86)\Steam\steamapps\common\Derail Valley\DerailValley_Data\Managed\;
+			C:\Program Files (x86)\Steam\steamapps\common\Derail Valley\DerailValley_Data\Managed\UnityModManager\
 		</ReferencePath>
 		<AssemblySearchPaths>$(AssemblySearchPaths);$(ReferencePath);</AssemblySearchPaths>
 	</PropertyGroup>
@@ -115,15 +122,15 @@ See [LICENSE][license-url] for more information.
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/derail-valley-modding/template-umm.svg?style=for-the-badge
-[contributors-url]: https://github.com/derail-valley-modding/template-umm/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/derail-valley-modding/template-umm.svg?style=for-the-badge
-[forks-url]: https://github.com/derail-valley-modding/template-umm/network/members
-[stars-shield]: https://img.shields.io/github/stars/derail-valley-modding/template-umm.svg?style=for-the-badge
-[stars-url]: https://github.com/derail-valley-modding/template-umm/stargazers
-[issues-shield]: https://img.shields.io/github/issues/derail-valley-modding/template-umm.svg?style=for-the-badge
-[issues-url]: https://github.com/derail-valley-modding/template-umm/issues
-[license-shield]: https://img.shields.io/github/license/derail-valley-modding/template-umm.svg?style=for-the-badge
-[license-url]: https://github.com/derail-valley-modding/template-umm/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/heizpilz/dv-show-job-end-time.svg?style=for-the-badge
+[contributors-url]: https://github.com/heizpilz/dv-show-job-end-time/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/heizpilz/dv-show-job-end-time.svg?style=for-the-badge
+[forks-url]: https://github.com/heizpilz/dv-show-job-end-time/network/members
+[stars-shield]: https://img.shields.io/github/stars/heizpilz/dv-show-job-end-time.svg?style=for-the-badge
+[stars-url]: https://github.com/heizpilz/dv-show-job-end-time/stargazers
+[issues-shield]: https://img.shields.io/github/issues/heizpilz/dv-show-job-end-time.svg?style=for-the-badge
+[issues-url]: https://github.com/heizpilz/dv-show-job-end-time/issues
+[license-shield]: https://img.shields.io/github/license/heizpilz/dv-show-job-end-time.svg?style=for-the-badge
+[license-url]: https://github.com/heizpilz/dv-show-job-end-time/blob/main/LICENSE
 [references-url]: https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-your-build?view=vs-2022
 [autocrlf-url]: https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_formatting_and_whitespace

@@ -1,9 +1,10 @@
 {
 	"Id": "ShowJobEndTime",
 	"Version": "1.0.0",
-	"DisplayName": "ShowJobEndTime",
+	"DisplayName": "Show Bonus End Time",
 	"Author": "heizpilz",
 	"EntryMethod": "ShowJobEndTime.Main.Load",
 	"ManagerVersion": "0.27.3",
-	"Repository": "https://raw.githubusercontent.com/heizpilz/dv-show-job-end-time/blob/main/repository.json"
+	"HomePage": "https://www.nexusmods.com/derailvalley/mods/783",
+	"Repository": "https://raw.githubusercontent.com/heizpilz/dv-show-job-end-time/main/repository.json"
 }
