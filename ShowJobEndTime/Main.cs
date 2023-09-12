@@ -13,7 +13,9 @@ using UnityModManagerNet;
 
 namespace ShowJobEndTime;
 
+#if DEBUG
 [EnableReloading]
+#endif
 public static class Main
 {
 	internal static Harmony? harmony = null;
