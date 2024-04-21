@@ -2,6 +2,11 @@
 	"Releases": [
 		{
 			"Id": "ShowJobEndTime",
+			"Version": "1.0.1",
+			"DownloadUrl": "https://github.com/heizpilz/dv-show-job-end-time/releases/download/v1.0.1/ShowJobEndTime_v1.0.1.zip"
+		},
+		{
+			"Id": "ShowJobEndTime",
 			"Version": "1.0.0",
 			"DownloadUrl": "https://github.com/heizpilz/dv-show-job-end-time/releases/download/v1.0.0/ShowJobEndTime_v1.0.0.zip"
 		}

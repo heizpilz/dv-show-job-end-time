@@ -77,6 +77,11 @@ public static class Main
 
 		public static List<TemplatePaperData> Postfix(List<TemplatePaperData> result, Job_data job)
 		{
+			if (job.timeLimit <= 0.0)
+			{
+				// do nothing if there is no bonus time set
+				return result;
+			}
 			foreach (TemplatePaperData templatePaperData in result)
 			{
 				if (templatePaperData.GetTemplatePaperType() == TemplatePaperType.FrontPage)
