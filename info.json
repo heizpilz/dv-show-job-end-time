@@ -1,6 +1,6 @@
 {
 	"Id": "ShowJobEndTime",
-	"Version": "1.0.1",
+	"Version": "1.0.2",
 	"DisplayName": "Show Bonus End Time",
 	"Author": "heizpilz",
 	"EntryMethod": "ShowJobEndTime.Main.Load",

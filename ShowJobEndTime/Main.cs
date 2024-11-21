@@ -116,7 +116,7 @@ public static class Main
 	{
 		public static void Postfix(WeatherForecastPoster __instance)
 		{
-			DateTime? lastForecast = __instance.forecaster.lastForecastTime;
+			DateTime? lastForecast = __instance.forecaster.lastForecastTimestamp;
 			if (lastForecast.HasValue)
 			{
 				__instance.dateTMPro.text = GetLocalizedAbbrMonthDay(lastForecast.Value);
