@@ -69,7 +69,7 @@ public static class Main
 		{
 			WeatherPresetManager weatherPresetManager = SingletonBehaviour<WeatherDriver>.Instance.manager;
 			float remainingRLSeconds = job.timeLimit - job.timeOnJob;
-			double timeScalingFactor = 1440d / weatherPresetManager.DayLengthInMinutes;
+			double timeScalingFactor = 1440d / weatherPresetManager.DayLengthInMinutes.CurrentValue;
 			double remainingGameSeconds = remainingRLSeconds * timeScalingFactor;
 			DateTime timeBonusEnd = weatherPresetManager.DateTime.AddSeconds(remainingGameSeconds);
 			return timeBonusEnd.ToString("t") + "\n" + GetLocalizedAbbrMonthDay(timeBonusEnd);
@@ -116,7 +116,7 @@ public static class Main
 	{
 		public static void Postfix(WeatherForecastPoster __instance)
 		{
-			DateTime? lastForecast = __instance.forecaster.lastForecastTimestamp;
+			DateTime? lastForecast = __instance.forecaster?.lastForecastTimestamp;
 			if (lastForecast.HasValue)
 			{
 				__instance.dateTMPro.text = GetLocalizedAbbrMonthDay(lastForecast.Value);
